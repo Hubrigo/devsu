@@ -1,0 +1,54 @@
+# ── Maven / Java ──────────────────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ── Spring Boot ───────────────────────────────────────────────────────────────
+application-local.properties
+application-local.yml
+*.log
+logs/
+
+# ── Node / Frontend ───────────────────────────────────────────────────────────
+node_modules/
+dist/
+.vite/
+*.local
+
+# ── IDEs ──────────────────────────────────────────────────────────────────────
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+*.eclipse
+.vscode/
+*.code-workspace
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Docker ────────────────────────────────────────────────────────────────────
+.dockerignore
+
+# ── Variables de entorno y secretos ───────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Misceláneos ───────────────────────────────────────────────────────────────
+*.swp
+*.swo
+*~
+ruvector.db
+.swarm/

@@ -1,0 +1,139 @@
+services:
+
+  # ── RabbitMQ ────────────────────────────────────────────────
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - banking-net
+
+  # ── PostgreSQL — Clientes ────────────────────────────────────
+  db-clientes:
+    image: postgres:15-alpine
+    container_name: db-clientes
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: db_clientes
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata-clientes:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_clientes"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - banking-net
+
+  # ── PostgreSQL — Cuentas ─────────────────────────────────────
+  db-cuentas:
+    image: postgres:15-alpine
+    container_name: db-cuentas
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: db_cuentas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata-cuentas:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d db_cuentas"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - banking-net
+
+  # ── Microservicio Clientes ───────────────────────────────────
+  ms-clientes:
+    build:
+      context: ./ms-clientes
+      dockerfile: Dockerfile
+    container_name: ms-clientes
+    ports:
+      - "8081:8081"
+    environment:
+      DB_HOST: db-clientes
+      DB_PORT: 5432
+      DB_NAME: db_clientes
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: guest
+    depends_on:
+      db-clientes:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8081/actuator/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    networks:
+      - banking-net
+
+  # ── Microservicio Cuentas ────────────────────────────────────
+  ms-cuentas:
+    build:
+      context: ./ms-cuentas
+      dockerfile: Dockerfile
+    container_name: ms-cuentas
+    ports:
+      - "8082:8082"
+    environment:
+      DB_HOST: db-cuentas
+      DB_PORT: 5432
+      DB_NAME: db_cuentas
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      RABBITMQ_HOST: rabbitmq
+      RABBITMQ_PORT: 5672
+      RABBITMQ_USER: guest
+      RABBITMQ_PASSWORD: guest
+    depends_on:
+      db-cuentas:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - banking-net
+
+  # ── Frontend Vue.js ──────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - ms-clientes
+      - ms-cuentas
+    networks:
+      - banking-net
+
+volumes:
+  pgdata-clientes:
+  pgdata-cuentas:
+
+networks:
+  banking-net:
+    driver: bridge

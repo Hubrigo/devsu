@@ -1,0 +1,441 @@
+{
+  "info": {
+    "_postman_id": "5533c13b-10b6-4a24-9bb7-1fa181af1690",
+    "name": "Devsu Banking API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53827717",
+    "_collection_link": "https://go.postman.co/collection/53827717-5533c13b-10b6-4a24-9bb7-1fa181af1690?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "POST Crear Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Jose Lema\",\n  \"genero\": \"M\",\n  \"edad\": 35,\n  \"identificacion\": \"ID-001\",\n  \"direccion\": \"Otavalo sn y principal\",\n  \"telefono\": \"098254785\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}"
+            },
+            "url": {
+              "raw": "{{ms_clientes}}/clientes",
+              "host": [
+                "{{ms_clientes}}"
+              ],
+              "path": [
+                "clientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar Clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ms_clientes}}/clientes",
+              "host": [
+                "{{ms_clientes}}"
+              ],
+              "path": [
+                "clientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Cliente por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ms_clientes}}/clientes/{{clienteId}}",
+              "host": [
+                "{{ms_clientes}}"
+              ],
+              "path": [
+                "clientes",
+                "{{clienteId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Actualizar Cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Jose Lema Actualizado\",\n  \"identificacion\": \"ID-001\",\n  \"contrasena\": \"1234\",\n  \"estado\": true\n}"
+            },
+            "url": {
+              "raw": "{{ms_clientes}}/clientes/{{clienteId}}",
+              "host": [
+                "{{ms_clientes}}"
+              ],
+              "path": [
+                "clientes",
+                "{{clienteId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Actualizar Parcial Cliente",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefono\": \"099000000\",\n  \"direccion\": \"Nueva dirección\"\n}"
+            },
+            "url": {
+              "raw": "{{ms_clientes}}/clientes/{{clienteId}}",
+              "host": [
+                "{{ms_clientes}}"
+              ],
+              "path": [
+                "clientes",
+                "{{clienteId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE Desactivar Cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{ms_clientes}}/clientes/{{clienteId}}",
+              "host": [
+                "{{ms_clientes}}"
+              ],
+              "path": [
+                "clientes",
+                "{{clienteId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cuentas",
+      "item": [
+        {
+          "name": "POST Crear Cuenta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"numeroCuenta\": \"478758\",\n  \"tipo\": \"AHORROS\",\n  \"saldoInicial\": 2000.00,\n  \"estado\": true,\n  \"clienteId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{ms_cuentas}}/cuentas",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "cuentas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar Cuentas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ms_cuentas}}/cuentas",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "cuentas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Cuenta por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ms_cuentas}}/cuentas/{{cuentaId}}",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "cuentas",
+                "{{cuentaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Actualizar Cuenta",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipo\": \"AHORROS\",\n  \"saldoInicial\": 2000.00,\n  \"numeroCuenta\":\"478758\",\n  \"estado\": true,\n  \"clienteId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{ms_cuentas}}/cuentas/{{cuentaId}}",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "cuentas",
+                "{{cuentaId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH Actualizar Parcial Cuenta",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": true\n}"
+            },
+            "url": {
+              "raw": "{{ms_cuentas}}/cuentas/{{cuentaId}}",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "cuentas",
+                "{{cuentaId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Movimientos",
+      "item": [
+        {
+          "name": "POST Registrar Retiro (478758 -575)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoMovimiento\": \"RETIRO\",\n  \"valor\": 575.00,\n  \"cuentaId\": 3\n}"
+            },
+            "url": {
+              "raw": "{{ms_cuentas}}/movimientos",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "movimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Registrar Depósito (225487 +600)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoMovimiento\": \"DEPOSITO\",\n  \"valor\": 600.00,\n  \"cuentaId\": 2\n}"
+            },
+            "url": {
+              "raw": "{{ms_cuentas}}/movimientos",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "movimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST Saldo Insuficiente (error 400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tipoMovimiento\": \"RETIRO\",\n  \"valor\": 99999.00,\n  \"cuentaId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{ms_cuentas}}/movimientos",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "movimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Listar Movimientos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ms_cuentas}}/movimientos",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "movimientos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET Movimiento por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ms_cuentas}}/movimientos/1",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "movimientos",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reportes",
+      "item": [
+        {
+          "name": "GET Reporte Estado de Cuenta",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{ms_cuentas}}/reportes?fechaInicio=2024-01-01&fechaFin=2024-12-31&clienteId=2",
+              "host": [
+                "{{ms_cuentas}}"
+              ],
+              "path": [
+                "reportes"
+              ],
+              "query": [
+                {
+                  "key": "fechaInicio",
+                  "value": "2024-01-01"
+                },
+                {
+                  "key": "fechaFin",
+                  "value": "2024-12-31"
+                },
+                {
+                  "key": "clienteId",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "ms_clientes",
+      "value": "http://localhost:8081"
+    },
+    {
+      "key": "ms_cuentas",
+      "value": "http://localhost:8082"
+    },
+    {
+      "key": "clienteId",
+      "value": "1"
+    },
+    {
+      "key": "cuentaId",
+      "value": "1"
+    }
+  ]
+}
