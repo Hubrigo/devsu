@@ -1,5 +1,7 @@
 # Devsu Banking — Microservicios Bancarios
 
+https://github.com/Hubrigo/devsu
+
 Solución de gestión de clientes, cuentas y movimientos bancarios implementada con arquitectura de microservicios.
 
 ## Arquitectura
@@ -32,7 +34,7 @@ Solución de gestión de clientes, cuentas y movimientos bancarios implementada 
 ## Ejecutar con Docker
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/Hubrigo/devsu
 cd devsu
 docker-compose up --build
 ```
